@@ -5,9 +5,9 @@ Proyecto Java 11 con framework SpringBoot 2 y base de datos Mysql 8, se utiliza 
 
 <h5>Admin</h5>
 Usuario: admin<br>
-Password: 12345<br>
-<br>
-<h5>Usuario Regular</h5>
-Usuario: User<br>
 Password: 12345
-<br>
+
+<h5>Usuario Regular</h5>
+Usuario: user<br>
+Password: 12345
+
