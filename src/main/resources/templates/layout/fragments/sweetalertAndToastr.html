@@ -1,0 +1,69 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head></head>
+<body>
+	<script th:fragment="GenericAlerts" th:inline="javascript">
+
+			var success = [[${success}]];
+			var error = [[${error}]];
+			var warning = [[${warning}]];
+			var info = [[${info}]];
+			
+			$(function() {
+			    const Toast = Swal.mixin({
+			      toast: true,
+			      position: 'top-end',
+			      showConfirmButton: false,
+			      timer: 4000
+			    });
+			    
+			    if(success != null){
+			        Toast.fire({
+			          icon: 'success',
+			          title: success
+			        });
+			    }
+			    if(error != null){
+			        Toast.fire({
+			          icon: 'error',
+			          title: error
+			        });
+			    }
+			    if(warning != null){
+			        Toast.fire({
+			          icon: 'warning',
+			          title: warning
+			        });
+			    }
+			    if(info != null){
+			        Toast.fire({
+			          icon: 'info',
+			          title: info
+			        });
+			    }
+			});
+			
+		</script>
+		
+		<script th:fragment="CrudAlerts" th:inline="javascript">
+			function confirmation(event,entity,action,data) {
+				  event.preventDefault();
+				  var route = "/" + entity + "/" + action  + "/" + data;
+				  Swal.fire({
+					  title: [[#{text.generic.deleteOk}]],
+					  icon: 'warning',
+					  showCancelButton: true,
+					  confirmButtonColor: '#3085d6',
+					  cancelButtonColor: '#d33',
+					  confirmButtonText: [[#{text.generic.accept}]],
+					  cancelButtonText: [[#{text.generic.cancel}]]
+					}).then((result) => {
+					  if (result.isConfirmed) {
+						  window.location.href=route;
+					  }
+					});
+			}		
+		</script>
+
+</body>
+</html>

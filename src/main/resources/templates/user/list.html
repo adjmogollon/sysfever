@@ -1,0 +1,186 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+
+	<!-- Site wrapper -->
+	<div class="wrapper">
+		<!-- Navbar -->
+		<nav th:replace="layout/fragments/navbar :: Navbar"></nav>
+
+		<!-- Main Sidebar Container -->
+		<aside th:replace="layout/fragments/sidebar :: Main-Sidebar-Container"></aside>
+		<!-- / Main Sidebar Container -->
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 th:text="#{text.menu.security.users}">Users</h1>
+						</div>
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item"><a href="#"
+									th:text="#{text.menu.security}">Security</a></li>
+								<li class="breadcrumb-item active"
+									th:text="#{text.menu.security.users}">Users</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+
+				<!-- /.container-fluid -->
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">
+										
+										<a th:href="@{/user/form/}" class="input-group-text"> <i
+											class="fas fa-plus"></i></a>
+
+									</div>
+
+									<div class="card-tools">
+										<button type="button" class="btn btn-tool"
+											data-card-widget="collapse" data-toggle="tooltip"
+											title="Collapse">
+											<i class="fas fa-minus"></i>
+										</button>
+										<button type="button" class="btn btn-tool"
+											data-card-widget="remove" data-toggle="tooltip"
+											title="Remove">
+											<i class="fas fa-times"></i>
+										</button>
+									</div>
+								</div>
+								<!-- /.card-header -->
+
+								<div class="card-body">
+
+									<div class="row">
+										<div class="col">
+											<div class="float-left">
+												
+											</div>
+										</div>
+										<div class="col">
+											<div class="float-right">
+												<form th:action="@{/user/list}" method="get">
+													<div class="input-group input-group-sm">
+														<div class="input-group-prepend">
+															<span class="input-group-text"><i
+																class="fas fa-search"></i></span>
+														</div>
+														<input type="text" class="form-control"
+															placeholder="Buscar" name="keyword">
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+											<table id="usuarios"
+												 class="table table-striped display nowrap" style="with:100%">
+												<thead class="thead-inverse">
+													<tr>
+														<th>usuario</th>
+														<th>Nombre</th>
+														<th>Apellido</th>
+														<th th:text="#{text.user.status}">Enabled</th>
+														<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+														<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="user: ${users}">
+														<td th:text="${user.username}"></td>
+														<td th:text="${user.firstname}"></td>
+														<td th:text="${user.lastname}"></td>
+														<td class="text-center">
+														<span class="btn btn-primary btn-sm" th:if="${user.enabled}" ><i class="fas fa-user"></i></span>
+														<span class="btn btn-danger btn-sm" th:unless="${user.enabled}" ><i class="fas fa-user-slash"></i></span>
+														</td>
+														<td class="text-center" sec:authorize="hasRole('ROLE_ADMIN')"><a
+															th:href="@{/user/form/} + ${user.id}"
+															class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+														</td>
+														
+														<td sec:authorize="hasRole('ROLE_ADMIN')" class="text-center"><a 
+															th:onclick="|return confirmation(event,'user','delete',${user.id})|">
+																<span class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></span>
+														</a></td>
+													</tr>
+												</tbody>
+
+											</table>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+											<nav th:replace="paginator-nav :: paginator"></nav>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+
+		<footer th:replace="layout/layout :: footer"></footer>
+
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+	</div>
+	<!-- ./wrapper -->
+
+	<div th:replace="layout/layout :: required-scripts"></div>
+
+	<script th:replace="layout/fragments/sweetalertAndToastr :: CrudAlerts" th:inline="javascript"></script>
+	
+	<!-- DataTables -->
+	<script type="text/javascript"
+		th:src="@{/js/jquery.spring-friendly.js}"></script>
+	<script
+		th:src="@{/webjars/AdminLTE/plugins/datatables/jquery.dataTables.min.js}"></script>
+	<script
+		th:src="@{/webjars/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+	<script
+		th:src="@{/webjars/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+	<script
+		th:src="@{/webjars/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+
+<script>
+
+$('table#usuarios').DataTable({
+	"responsive": true,
+	"paging":   false,
+    "ordering": false,
+    "info":     false,
+    "searching": false
+
+});
+
+</script>
+
+</body>
+</html>

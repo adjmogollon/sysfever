@@ -1,0 +1,85 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+
+	<!-- Site wrapper -->
+	<div class="wrapper">
+		<!-- Navbar -->
+		<nav th:replace="layout/fragments/navbar :: Navbar"></nav>
+
+		<!-- Main Sidebar Container -->
+		<aside th:replace="layout/fragments/sidebar :: Main-Sidebar-Container"></aside>
+		<!-- / Main Sidebar Container -->
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 th:text="#{text.menu.security.users}">Users</h1>
+						</div>
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item"><a href="#"
+									th:text="#{text.menu.security}">Security</a></li>
+								<li class="breadcrumb-item active"
+									th:text="#{text.menu.security.users}">Users</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title" th:text="${titulo}">DataTable
+										Title</h3>
+								</div>
+								<!-- /.card-header -->
+
+								<div class="card-body">
+
+									<div th:object="${usuario}" th:remove="tag">
+										<ul th:if="${#fields.hasErrors('*')}"
+											class="alert alert-danger" role="alert">
+											<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+										</ul>
+									</div>
+
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+
+		<footer th:replace="layout/layout :: footer"></footer>
+
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+	</div>
+	<!-- ./wrapper -->
+
+	<div th:replace="layout/layout :: required-scripts"></div>
+
+
+</body>
+</html>
