@@ -19,7 +19,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private LoginSuccessHandler successHandler;
-
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
