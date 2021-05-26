@@ -38,7 +38,6 @@ public class FacturaController {
 
 	@Autowired
 	private IClienteService clienteService;
-
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	@Autowired
