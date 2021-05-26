@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.security.access.annotation.Secured;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sysfever.app.models.entity.Role;
-import com.sysfever.app.models.repository.IRoleRepository;
 import com.sysfever.app.models.service.IRoleService;
 
 @Controller
@@ -34,8 +32,6 @@ import com.sysfever.app.models.service.IRoleService;
 public class RoleController {
 	
 	private final Log logger = LogFactory.getLog(this.getClass());
-	@Autowired
-	private MessageSource messageSource;
 
 	@Autowired
 	private IRoleService roleService;

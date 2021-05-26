@@ -19,7 +19,6 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +34,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.http.ResponseEntity;
 
 import com.sysfever.app.models.entity.User;
 import com.sysfever.app.models.entity.Role;
@@ -70,7 +68,6 @@ public class UserController {
 
 		logger.info("ingresado al listado de usuarios");
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		Pageable pageRequest = PageRequest.of(page, 10);
 		Page<User> users = null;
@@ -197,7 +194,6 @@ public class UserController {
 
 		logger.info("ingresado al listado de usuarios DataTable");
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		model.addAttribute("titulo", messageSource.getMessage("text.user.list.title", null, locale));
 		return "/user/listDataTable";

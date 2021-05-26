@@ -5,10 +5,8 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.datatables.repository.DataTablesRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.sysfever.app.models.entity.User;
-import com.sysfever.app.models.entity.Usuario;
 
 public interface IUserRepository extends DataTablesRepository<User,Long>{
 
